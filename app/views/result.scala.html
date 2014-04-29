@@ -3,24 +3,25 @@
 @import helper._
 @import models.TimeCard
 
-@numFormat(num: Double) = @{ "%10.2f".format(num) }
+@numFormat(num: Double) = @{ f"$num%10.2f" }
 
 
 <table class="table table-bordered table-condensed">
   <thead>
-  <tr style="background-color: #222; color: #fff;">
-    <th>Task</th><th>Time[h]</th>
-  </tr>
-</thead>
-<tbody>
+    <tr style="background-color: #222; color: #fff;">
+      <th>Task</th><th>Time [h]</th>
+    </tr>
+  </thead>
+  <tbody>
 @for(task <- timeCard.taskList) {
-  <tr>
-    <td>@task.name</td>
-    <td>@numFormat(task.time)</td>
-  </tr>
+    <tr>
+      <td>@task.name</td>
+      <td>@numFormat(task.time)</td>
+    </tr>
 }
-  <tr class="success">
-    <td><strong>Total</strong></td><td><strong>@numFormat(timeCard.totalHour)</strong></td>
-  </tr>
-<tbody>
+    <tr class="success">
+      <td><strong>Total</strong></td>
+      <td><strong>@numFormat(timeCard.totalHour)</strong></td>
+    </tr>
+  <tbody>
 </table>
