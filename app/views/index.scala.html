@@ -1,0 +1,36 @@
+@(kintaiForm: Form[TimeCard])
+
+@implicitField = @{ FieldConstructor(bootstrap.twitterBootstrapInput.f) }
+
+@import helper._
+@import models.TimeCard
+
+@main("Kintai") {
+
+  <div class="jumbotron">
+    <h1 class="site-name">Kintai</h1>
+    <p><strong>FORMAT:</strong> <em>FromTime(hh:mm)-ToTime(hh:mm) TaskName:Memo</em></p>
+    <small>*<em>Memo</em>(include the prior semicolon) is optional.</small>
+
+  @form(routes.Application.convert) {
+
+    @textarea(
+      kintaiForm("content"),
+      'class -> "form-control",
+      'rows -> 10,
+      'placeholder -> """09:30-10:00 事務作業""",
+      '_label -> "",
+      '_help -> "",
+      '_error -> kintaiForm.globalError
+    )
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+  }
+
+  </div>
+
+  @if(kintaiForm.value.isDefined) {
+    @result(kintaiForm.get)
+  }
+
+}
